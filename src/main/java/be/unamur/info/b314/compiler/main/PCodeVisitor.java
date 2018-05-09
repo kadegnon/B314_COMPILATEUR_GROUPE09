@@ -1,6 +1,7 @@
 package be.unamur.info.b314.compiler.main;
 
 import be.unamur.info.b314.compiler.B314BaseVisitor;
+import be.unamur.info.b314.compiler.B314Parser;
 import be.unamur.info.b314.compiler.B314Parser.ImpDeclContext;
 import be.unamur.info.b314.compiler.B314Parser.RootContext;
 import be.unamur.info.b314.compiler.semantics.SymTableFiller;
@@ -18,6 +19,17 @@ public class PCodeVisitor extends B314BaseVisitor<Object> {
   private final SymTableFiller symTable;
 
   private final PCodePrinter printer;
+
+  /**
+   * Load Variables and store them
+   */
+  private void NumberOfVariable() {
+    for (int i = 0; i < 100; i++) {
+      printer.printLoadAdress(PCodePrinter.PCodeTypes.Int, 0, i);
+      printer.printRead();
+      printer.printStore(PCodePrinter.PCodeTypes.Int);
+    }
+  }
 
   public PCodeVisitor(SymTableFiller symTable, PCodePrinter printer) {
     this.symTable = symTable;
@@ -38,6 +50,7 @@ public class PCodeVisitor extends B314BaseVisitor<Object> {
   public Object visitImpDecl(ImpDeclContext ctx) {
     return super.visitImpDecl(ctx);
   }
+
 
   /*
   @Override
